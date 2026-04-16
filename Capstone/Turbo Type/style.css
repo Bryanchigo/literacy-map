@@ -1,0 +1,183 @@
+/* --- VARIABLES --- */
+:root {
+    --gas-green: #00ff88;
+    --nitro-blue: #00d4ff;
+    --error-red: #ff4757;
+    --bg-dark: #0a0b10;
+    --panel-bg: #161b22;
+    --text-muted: #666;
+}
+
+body {
+    font-family: 'Segoe UI', system-ui, sans-serif;
+    background-color: var(--bg-dark);
+    color: white;
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+#game-container {
+    width: 950px;
+    background: var(--panel-bg);
+    border-radius: 24px;
+    box-shadow: 0 0 50px rgba(0,0,0,0.8);
+    overflow: hidden;
+    border: 1px solid #30363d;
+}
+
+/* --- SCREENS --- */
+.screen {
+    position: absolute;
+    inset: 0;
+    background: rgba(18, 18, 18, 0.95);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    z-index: 100;
+    text-align: center;
+    border-radius: 13px;
+}
+
+.hidden { display: none !important; }
+
+/* Difficulty Selector */
+.mode-selector {
+    margin: 20px 0;
+    display: flex;
+    gap: 15px;
+}
+
+.mode-selector label {
+    background: #2a2a2a;
+    padding: 15px 20px;
+    border-radius: 8px;
+    cursor: pointer;
+    border: 2px solid transparent;
+    transition: 0.2s;
+}
+
+.mode-selector input[type="radio"] { display: none; }
+
+.mode-selector label:has(input:checked) {
+    border-color: var(--gas-green);
+    background: #333;
+}
+
+/* --- RACE TRACK --- */
+#race-track {
+    height: 180px;
+    background: #0d1117;
+    position: relative;
+    border-bottom: 2px solid #30363d;
+    /* Texture for the road */
+    background-image: linear-gradient(#161b22 1px, transparent 1px);
+    background-size: 100% 40px;
+}
+
+.road-line {
+    position: absolute;
+    height: 2px;
+    width: 100px;
+    background: linear-gradient(90deg, transparent, rgba(0,212,255,0.2), transparent);
+    top: 50%;
+    animation: drive 0.8s linear infinite;
+}
+
+.road-line:nth-child(1) { left: 10%; }
+.road-line:nth-child(2) { left: 40%; }
+.road-line:nth-child(3) { left: 70%; }
+
+@keyframes drive {
+    from { transform: translateX(1000px); }
+    to { transform: translateX(-200px); }
+}
+
+.car {
+    position: absolute;
+    font-size: 2.8rem;
+    filter: drop-shadow(0 0 10px rgba(0,0,0,0.5));
+    transition: left 0.4s cubic-bezier(0.18, 0.89, 0.32, 1.28);
+}
+
+#player-car { top: 25px; filter: drop-shadow(0 0 15px var(--gas-green)); }
+#bot-car { top: 110px; filter: drop-shadow(0 0 10px var(--nitro-blue)); opacity: 0.8; }
+
+#finish-line {
+    position: absolute;
+    right: 40px;
+    width: 15px;
+    height: 100%;
+    background: repeating-linear-gradient(0deg, #30363d, #30363d 10px, #000 10px, #000 20px);
+}
+
+/* --- TYPING AREA --- */
+#typing-area {
+    padding: 50px;
+    background: #0d1117;
+    text-align: center;
+}
+
+#text-display {
+    font-family: 'Consolas', 'Monaco', monospace;
+    font-size: 2rem;
+    line-height: 1.6;
+    letter-spacing: 1px;
+    word-spacing: 5px;
+}
+
+#text-display span {
+    color: var(--text-muted);
+    transition: 0.1s;
+}
+
+.correct { color: var(--gas-green) !important; text-shadow: 0 0 10px var(--gas-green); }
+.incorrect { color: var(--error-red) !important; background: rgba(255, 71, 87, 0.2); border-radius: 4px; }
+
+#hidden-input { opacity: 0; position: absolute; }
+
+.current {
+    border-bottom: 3px solid var(--nitro-blue);
+    color: #fff !important;
+}
+
+/* --- HUD & BUTTONS --- */
+#hud {
+    display: flex;
+    justify-content: space-around;
+    padding: 25px;
+    background: #161b22;
+}
+
+#end-screen .stat-box {
+    margin-bottom: 40px; /* Adds space below the WPM number */
+}
+
+#final-wpm {
+    font-size: 5rem; /* Makes the final score big and clear */
+    font-weight: 900;
+    color: var(--gas-green);
+    margin-top: 10px;
+}
+
+.stat-box { text-align: center; }
+.stat-label { color: var(--text-muted); font-size: 0.7rem; text-transform: uppercase; letter-spacing: 2px; }
+.stat-value { font-size: 1.8rem; font-weight: 800; font-variant-numeric: tabular-nums; }
+
+button {
+    background: linear-gradient(135deg, #00ff88 0%, #00bd65 100%);
+    color: #050505;
+    padding: 16px 45px;
+    border: none;
+    border-radius: 12px;
+    font-weight: 900;
+    text-transform: uppercase;
+    cursor: pointer;
+    box-shadow: 0 4px 15px rgba(0, 255, 136, 0.3);
+    transition: 0.2s;
+}
+
+button:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(0, 255, 136, 0.5); }

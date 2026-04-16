@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Turbo Type: City Circuit</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div id="game-container">
+        
+        <div id="start-screen" class="screen">
+            <h1 class="title">🏁 TURBO TYPE 🏁</h1>
+            <p>Select your training level:</p>
+            
+            <div class="mode-selector">
+                <label>
+                    <input type="radio" name="difficulty" value="easy" checked> 
+                    <span>Easy</span>
+                </label>
+                <label>
+                    <input type="radio" name="difficulty" value="medium"> 
+                    <span>Medium</span>
+                </label>
+                <label>
+                    <input type="radio" name="difficulty" value="hard"> 
+                    <span>Hard</span>
+                </label>
+            </div>
+
+            <button id="start-btn">Start Race</button>
+        </div>
+
+        <div id="end-screen" class="screen hidden">
+            <h1 id="result-message">Race Complete!</h1>
+            <div class="stat-box">
+                <div class="stat-label">Final WPM</div>
+                <div id="final-wpm">0</div>
+            </div>
+            <button id="restart-btn">Race Again</button>
+        </div>
+
+        <div id="race-track">
+            <div class="road-line"></div>
+            <div class="road-line"></div>
+            <div class="road-line"></div>
+            <div id="finish-line"></div>
+            
+            <div id="player-car" class="car">🏎️</div>
+            <div id="bot-car" class="car">🤖</div>
+        </div>
+
+        <div id="typing-area">
+            <div id="text-display">
+                </div>
+            
+            <input type="text" id="hidden-input" autocomplete="off" autofocus>
+        </div>
+
+        <div id="hud" class="hidden">
+            <div class="stat-box">
+                <div class="stat-label">WPM</div>
+                <div id="wpm-counter">0</div>
+            </div>
+            <div class="stat-box">
+                <div class="stat-label">Accuracy</div>
+                <div id="accuracy-counter">100%</div>
+            </div>
+        </div>
+
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
